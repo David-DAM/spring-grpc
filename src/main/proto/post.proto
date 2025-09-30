@@ -5,12 +5,11 @@ option java_package = "com.davinchicoder.springgrpc.proto";
 option java_outer_classname = "PostProto";
 
 service Crud {
-  // Sends a greeting
-  rpc GetAllPosts(PaginationRequest) returns (stream Post) {}
-  rpc GetPostById(PostId) returns (Post) {}
-  rpc SavePost(Post) returns (Post) {}
-  rpc DeletePost(PostId) returns (Post) {}
-  rpc UpdatePost(Post) returns (Post) {}
+  rpc GetAllPosts(PaginationRequest) returns (PostList) {}
+  rpc GetPostById(PostId) returns (PostDto) {}
+  rpc SavePost(PostDto) returns (PostDto) {}
+  rpc DeletePost(PostId) returns (PostDto) {}
+  rpc UpdatePost(PostDto) returns (PostDto) {}
 }
 
 message PaginationRequest {
@@ -22,10 +21,14 @@ message PostId{
   int64 id = 1;
 }
 
-message Post{
+message PostDto{
   int64 id = 1;
   string title = 2;
   string content = 3;
   string author = 4;
   string imageUrl = 5;
+}
+
+message PostList{
+  repeated PostDto postDto = 1;
 }
